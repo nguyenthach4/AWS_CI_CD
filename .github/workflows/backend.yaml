@@ -99,6 +99,11 @@ jobs:
           pipenv install
         working-directory: ./backend
 
+      - name: Verify Dockerfile
+        run: |
+          ls -l ./backend/Dockerfile
+        working-directory: ./backend
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -119,7 +124,7 @@ jobs:
           IMAGE_TAG: latest
         run: |
           echo "ECR $REGISTRY/$REPOSITORY:$IMAGE_TAG"
-          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
+          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG -f ./backend/Dockerfile ./backend
           docker images
 
       - name: Cache Docker Image
