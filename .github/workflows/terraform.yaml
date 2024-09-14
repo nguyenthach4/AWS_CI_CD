@@ -39,6 +39,8 @@ jobs:
         continue-on-error: true
 
       - name: Terraform Apply
+        if: github.ref == 'refs/header/main' && github.event_name == 'push'
         run: |
           cd setup/terraform/
+          ls
           terraform apply -auto-approve
