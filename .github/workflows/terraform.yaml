@@ -39,4 +39,6 @@ jobs:
         continue-on-error: true
 
       - name: Terraform Apply
-        run: terraform apply
+        run: |
+        cd setup/terraform/
+        terraform apply
