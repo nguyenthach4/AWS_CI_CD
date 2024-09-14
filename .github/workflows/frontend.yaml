@@ -34,7 +34,11 @@ jobs:
             npm-
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+        working-directory: ./frontend
+
+      - name: List installed packages
+        run: npm list --depth=0
         working-directory: ./frontend
 
       - name: Run ESLint
@@ -52,8 +56,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 14.x  # or any version you're using
+
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+        working-directory: ./frontend
+
+      - name: List installed packages
+        run: npm list --depth=0
         working-directory: ./frontend
 
       - name: Run Tests
@@ -68,8 +81,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 14.x
+
       - name: Install dependencies
-        run: npm install
+        run: npm ci
         working-directory: ./frontend
 
       - name: Configure AWS Credentials
