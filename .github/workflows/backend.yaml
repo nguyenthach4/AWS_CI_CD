@@ -25,7 +25,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.cache/pipenv
-          key: pipenv-${{ runner.os }}-${{ hashFiles('**/Pipfile.lock') }}
+          key: pipenv-${{ runner.os }}-${{ hashFiles('backend/Pipfile.lock') }}
           restore-keys: |
             pipenv-${{ runner.os }}-
 
@@ -123,7 +123,7 @@ jobs:
           REPOSITORY: backend
           IMAGE_TAG: latest
         run: |
-          echo "ECR $REGISTRY/$REPOSITORY:$IMAGE_TAG"
+          echo "Building Docker image: $REGISTRY/$REPOSITORY:$IMAGE_TAG"
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG -f ./backend/Dockerfile ./backend
           docker images
 
